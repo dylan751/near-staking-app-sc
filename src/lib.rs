@@ -4,15 +4,15 @@ use near_sdk::json_types::U128;
 use near_sdk::serde::{Deserialize, Serialize};
 use near_sdk::{
     env, ext_contract, near_bindgen, AccountId, Balance, BlockHeight, BorshStorageKey, EpochHeight,
-    PanicOnDefault, Promise, PromiseOrValue, Timestamp,
+    Gas, PanicOnDefault, Promise, PromiseOrValue, PromiseResult, Timestamp,
 };
 
 pub use crate::account::AccountJson;
 use crate::account::*;
 use crate::config::*;
-use crate::core_impl::*;
-use crate::enumeration::*;
-use crate::internal::*;
+pub use crate::core_impl::*;
+pub use crate::enumeration::*;
+pub use crate::internal::*;
 use crate::utils::*;
 
 mod account;
@@ -48,8 +48,8 @@ pub struct StakingContract {
     pub owner_id: AccountId,
     pub ft_contract_id: AccountId,
     pub config: Config,               // Cấu hình công thức trả thưởng cho user
-    pub total_stake_balance: Balance, // Số lượng user stake trong contract
-    pub total_paid_reward_balance: Balance, // Số lượng thưởng trả cho user
+    pub total_stake_balance: Balance, // Tổng số lượng token user đã stake trong contract
+    pub total_paid_reward_balance: Balance, // Tổng số lượng thưởng đã trả cho user
     pub total_staker: Balance,        // Tổng số account đang stake trong contract
     pub pre_reward: Balance,
     pub last_block_balance_change: BlockHeight,

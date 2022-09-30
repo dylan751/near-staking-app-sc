@@ -1,5 +1,3 @@
-use near_sdk::{ext_contract, Gas, PromiseResult};
-
 use crate::*;
 
 pub const DEPOSIT_ONE_YOCTO: Balance = 1;
@@ -32,7 +30,7 @@ impl FungibleTokenReceiver for StakingContract {
         &mut self,
         sender_id: AccountId,
         amount: U128,
-        msg: String,
+        _msg: String,
     ) -> PromiseOrValue<U128> {
         self.internal_deposit_and_stake(sender_id, amount.0);
 
